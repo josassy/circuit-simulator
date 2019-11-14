@@ -4,3 +4,8 @@
 .vs/circuit-simulator/v15/.suo
 *.sqlite
 *.json
+*.tlog
+*.log
+/Debug
+/circuit-simulator/Debug
+.vs
