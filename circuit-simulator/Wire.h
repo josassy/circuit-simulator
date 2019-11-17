@@ -20,6 +20,5 @@ private:
   std::vector<Gate*> out;
   WireValue state;
   std::vector<WireValue> history;
-  int WireNum;
   std::string name;
 };
