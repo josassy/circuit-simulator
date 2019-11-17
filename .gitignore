@@ -1,7 +1,6 @@
 
 *.db
 *.opendb
-.vs/circuit-simulator/v15/.suo
 *.sqlite
 *.json
 *.tlog
