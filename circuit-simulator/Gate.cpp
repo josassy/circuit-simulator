@@ -13,8 +13,14 @@ void Gate::doLogic() {
 }
 
 WireValue Gate::getNextOutput() {
-  auto in1State = in1->getState();
-  auto in2State = in2->getState();
+  WireValue in1State; 
+  WireValue in2State;
+  in1State = in1->getState();
+  // In case NOT gate, don't get in2 state
+  if (type != GateType::NOT) {
+    in2State = in2->getState();
+  }
+
   switch (type) {
   case GateType::AND:
     if (in1State == 0 || in2State == 0) {
