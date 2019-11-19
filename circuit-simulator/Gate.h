@@ -1,4 +1,5 @@
 #pragma once
+#include "Wire.h"
 
 enum GateType {
   AND,
@@ -16,6 +17,7 @@ class Gate {
 public:
   Gate();
   void doLogic();
+  WireValue getNextOutput();
 
 private:
   Wire* in1;
