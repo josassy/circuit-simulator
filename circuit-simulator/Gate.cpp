@@ -9,6 +9,3 @@ Gate::Gate() {
 void Gate::doLogic() {
   // TODO
 }
-
-
-
