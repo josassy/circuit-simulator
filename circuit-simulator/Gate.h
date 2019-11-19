@@ -20,6 +20,7 @@ public:
 private:
   Wire* in1;
   Wire* in2;
+  Wire* out;
   GateType type;
   int delay;
 };
