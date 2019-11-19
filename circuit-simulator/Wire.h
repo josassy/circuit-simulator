@@ -4,9 +4,9 @@
 #include <string>
 
 enum WireValue {
-  ON,
-  OFF,
-  X
+  ON = 1,
+  OFF = 0,
+  X = -1
 };
 
 class Gate;
