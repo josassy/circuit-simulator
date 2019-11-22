@@ -2,26 +2,24 @@
 
 #include <vector>
 #include <string>
-#include "Gate.h"
-
-enum WireValue {
-  ON = 1,
-  OFF = 0,
-  X = -1
-};
+#include "Enums.h"
 
 class Gate;
 
 class Wire {
 public:
-  Wire();
+  Wire(WireValue s = WireValue::X);
   WireValue getState();
+  WireValue getState(int time);
   void setState(WireValue state);
-  void doLogic();
+
+  Gate* getGate(int i) const { return output[i]; }
+  void setGate(Gate * g) { output.push_back(g); }
+  int getNumGates() const { return (int)output.size(); }
+
 
 private:
-  std::vector<Gate*> output;
-  WireValue state;
-  std::vector<WireValue> history;
+  std::vector<Gate*> output; // All the gates that the wire drives
+  std::vector<WireValue> history; // Full history of wire (including current state)
   std::string name;
 };

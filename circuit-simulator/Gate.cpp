@@ -6,21 +6,30 @@ Gate::Gate() {
   // TODO
 }
 
+WireValue Gate::eval()
+{
+  return doLogic(in1->getState(), in2->getState());
+}
+
+WireValue Gate::eval(WireValue state, Wire *input)
+{
+  // Determine which wire is changing, and evaluate what the change would be
+  if (input == in1) {
+    return doLogic(state, in2->getState())
+  }
+  else if (input == in2) {
+    return doLogic(state, in1->getState())
+  }
+}
+
 void Gate::doLogic() {
   if (getNextOutput() != out->getState()) {
     // TODO: Logic to schedule change event
   }
 }
 
-WireValue Gate::getNextOutput() {
-  WireValue in1State; 
-  WireValue in2State;
-  in1State = in1->getState();
-  // In case NOT gate, don't get in2 state
-  if (type != GateType::NOT) {
-    in2State = in2->getState();
-  }
-
+WireValue Gate::doLogic(WireValue in1State, WireValue in2State) {
+ 
   switch (type) {
   case GateType::AND:
     if (in1State == 0 || in2State == 0) {

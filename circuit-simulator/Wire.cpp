@@ -7,7 +7,13 @@ Wire::Wire() {
 
 WireValue Wire::getState()
 {
-  return state;
+  // TODO: check if history size is more than 0
+  return history.back();
+}
+
+WireValue Wire::getState(int time)
+{
+  // check if index is valid. If not, call getState();
 }
 
 void Wire::setState(WireValue state) {

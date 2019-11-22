@@ -1,25 +1,19 @@
 #pragma once
-#include "Wire.h"
-
-enum GateType {
-  AND,
-  OR,
-  XOR,
-  NAND,
-  NOR,
-  XNOR,
-  NOT
-};
+#include "Enums.h"
 
 class Wire;
 
 class Gate {
 public:
-  Gate();
+  Gate(GateType t, int d, Wire *i1, Wire *i2, Wire *o);
+  WireValue eval();
+  WireValue eval(WireValue state, Wire * input);
+  Wire *getOut() const { return out; }
+  int getDelay() const { return delay; }
   void doLogic();
-  WireValue getNextOutput();
 
 private:
+  WireValue doLogic(WireValue s1, WireValue s2);
   Wire* in1;
   Wire* in2;
   Wire* out;
