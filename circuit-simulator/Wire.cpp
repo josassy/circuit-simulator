@@ -1,7 +1,8 @@
 #pragma once
 #include "Wire.h"
+#include "Gate.h"
 
-Wire::Wire() {
+Wire::Wire(WireValue s) {
   // TODO
 }
 
@@ -14,16 +15,13 @@ WireValue Wire::getState()
 WireValue Wire::getState(int time)
 {
   // check if index is valid. If not, call getState();
+  return WireValue::X;
 }
 
 void Wire::setState(WireValue state) {
-  if (this->state != state) {
-    for (Gate* gate : output) {
-      gate->doLogic();
+  if (this->getState() != state) {
+    for (int i = 0; i < getNumGates(); i++) {
+      getGate(i)->eval();
     }
   }
-}
-
-void Wire::doLogic() {
-  history.push_back(state);
 }
