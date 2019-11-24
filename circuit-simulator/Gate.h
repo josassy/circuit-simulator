@@ -10,7 +10,6 @@ public:
   WireValue eval(WireValue state, Wire * input);
   Wire *getOut() const { return out; }
   int getDelay() const { return delay; }
-  void doLogic();
 
 private:
   WireValue doLogic(WireValue s1, WireValue s2);

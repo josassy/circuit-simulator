@@ -1,9 +1,15 @@
 #pragma once
 
 #include "Gate.h"
+#include "Wire.h"
 
-Gate::Gate() {
-  // TODO
+Gate::Gate(GateType t, int d, Wire * i1, Wire * i2, Wire * o)
+{
+  type = t;
+  delay = d;
+  in1 = i1;
+  in2 = in2;
+  out = o;
 }
 
 WireValue Gate::eval()
@@ -15,16 +21,10 @@ WireValue Gate::eval(WireValue state, Wire *input)
 {
   // Determine which wire is changing, and evaluate what the change would be
   if (input == in1) {
-    return doLogic(state, in2->getState())
+    return doLogic(state, in2->getState());
   }
   else if (input == in2) {
-    return doLogic(state, in1->getState())
-  }
-}
-
-void Gate::doLogic() {
-  if (getNextOutput() != out->getState()) {
-    // TODO: Logic to schedule change event
+    return doLogic(state, in1->getState());
   }
 }
 
