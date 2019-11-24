@@ -46,6 +46,9 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\README.md">
+      <Filter>Resource Files</Filter>
+    </None>
     <None Include="..\.gitignore">
       <Filter>Resource Files</Filter>
     </None>
