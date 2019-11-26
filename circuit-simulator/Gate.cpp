@@ -3,7 +3,7 @@
 #include "Gate.h"
 #include "Wire.h"
 
-Gate::Gate(GateType t, int d, Wire * i1, Wire * i2, Wire * o)
+Gate::Gate(GateType t, int d, Wire* i1, Wire* i2, Wire* o)
 {
   type = t;
   delay = d;
@@ -28,8 +28,8 @@ WireValue Gate::eval(WireValue state, Wire *input)
   }
 }
 
-WireValue Gate::doLogic(WireValue in1State, WireValue in2State) {
- 
+WireValue Gate::doLogic(WireValue in1State, WireValue in2State)
+{
   switch (type) {
   case GateType::AND:
     if (in1State == 0 || in2State == 0) {

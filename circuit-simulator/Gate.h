@@ -5,10 +5,10 @@ class Wire;
 
 class Gate {
 public:
-  Gate(GateType t, int d, Wire *i1, Wire *i2, Wire *o);
+  Gate(GateType t, int d, Wire* i1, Wire* i2, Wire* o);
   WireValue eval();
-  WireValue eval(WireValue state, Wire * input);
-  Wire *getOut() const { return out; }
+  WireValue eval(WireValue state, Wire* input);
+  Wire* getOut() const { return out; }
   int getDelay() const { return delay; }
 
 private:

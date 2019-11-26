@@ -116,6 +116,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Enums.cpp" />
+    <ClCompile Include="Event.cpp" />
     <ClCompile Include="Gate.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Wire.cpp" />
