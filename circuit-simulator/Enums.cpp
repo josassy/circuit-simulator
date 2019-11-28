@@ -1,11 +1,13 @@
 #pragma once
 #include "Enums.h"
 
+using namespace Enums;
+
 /*
 * Convert string input to GateType.
 * Assumes valid input of one of the enums, returns NOT by default.
 */
-GateType strToGateType(std::string str) {
+GateType Enums::strToGateType(std::string str) {
   if (str == "AND") { return GateType::AND; }
   else if (str == "OR") { return GateType::OR; }
   else if (str == "XOR") { return GateType::XOR; }
