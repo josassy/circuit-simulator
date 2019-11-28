@@ -10,7 +10,7 @@ Wire::Wire() {
 WireValue Wire::getState()
 {
   // If no history, return unknown as we don't know state yet
-  if (history.size > 0) {
+  if (history.size() > 0) {
     return history.back();
   }
   else {
@@ -21,7 +21,7 @@ WireValue Wire::getState()
 WireValue Wire::getState(int time)
 {
   // check if index is valid. If not, call getState();
-  if (time < history.size) {
+  if (time < history.size()) {
     return history.at(time);
   }
   else {
@@ -38,14 +38,14 @@ void Wire::setState(WireValue state, int time) {
   }
 
   // If time == last index in history, change that
-  else if (time == history.size - 1) {
+  else if (time == history.size() - 1) {
     history.back() = state;
   }
 
   // If time >= history.size, push to history
-  else if (time >= history.size) {
+  else if (time >= history.size()) {
     // push back with existing state
-    for (int i = history.size; i < time; i++) {
+    for (int i = history.size(); i < time; i++) {
       history.push_back(history.back());
     }
     // history.size should now == time
