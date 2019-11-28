@@ -115,6 +115,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Circuit.cpp" />
     <ClCompile Include="Enums.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="Gate.cpp" />
