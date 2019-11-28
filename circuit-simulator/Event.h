@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include "Enums.h"
+using namespace Enums;
 
 class Event {
 public: 

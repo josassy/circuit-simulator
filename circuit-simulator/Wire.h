@@ -4,6 +4,8 @@
 #include <string>
 #include "Enums.h"
 
+using namespace Enums;
+
 class Gate;
 
 class Wire {

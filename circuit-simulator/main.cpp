@@ -3,6 +3,8 @@
 #include "Event.h"
 #include "Enums.h"
 
+using namespace Enums;
+
 int main() {
   std::cout << "Hello World!" << std::endl;
   

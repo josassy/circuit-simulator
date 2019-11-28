@@ -1,7 +1,12 @@
 #pragma once
 #include <string>
 
+/*
+* Namespace to hold all the enums
+*/
 namespace Enums {
+
+  // Represent valid type of logic gate
   enum GateType {
     AND,
     OR,
@@ -12,6 +17,7 @@ namespace Enums {
     NOT
   };
 
+  // Represent valid gate value
   enum WireValue {
     ON = 1,
     OFF = 0,
