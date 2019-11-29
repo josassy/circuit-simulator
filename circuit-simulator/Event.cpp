@@ -20,7 +20,6 @@ bool operator<(const Event & e1, const Event & e2)
   }
 }
 
-// Print function used for debugging
 void Event::print() const {
   std::cout << "wire " << wireNum << " to " << value << " at " << time << "ms. Event #" << count << std::endl;
 }
