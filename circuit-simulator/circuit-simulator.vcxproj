@@ -133,6 +133,26 @@
     <None Include="..\.gitignore" />
     <None Include="..\README.md" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\vector files\circuit0.txt" />
+    <Text Include="..\vector files\circuit0_v.txt" />
+    <Text Include="..\vector files\circuit1.txt" />
+    <Text Include="..\vector files\circuit1_v.txt" />
+    <Text Include="..\vector files\circuit2.txt" />
+    <Text Include="..\vector files\circuit2_v.txt" />
+    <Text Include="..\vector files\circuit3.txt" />
+    <Text Include="..\vector files\circuit3_v.txt" />
+    <Text Include="..\vector files\circuit4.txt" />
+    <Text Include="..\vector files\circuit4_v.txt" />
+    <Text Include="..\vector files\circuit5.txt" />
+    <Text Include="..\vector files\circuit5_v.txt" />
+    <Text Include="..\vector files\circuit7.txt" />
+    <Text Include="..\vector files\circuit7_v.txt" />
+    <Text Include="..\vector files\circuit8.txt" />
+    <Text Include="..\vector files\circuit8_v.txt" />
+    <Text Include="..\vector files\ff.txt" />
+    <Text Include="..\vector files\ff_v.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

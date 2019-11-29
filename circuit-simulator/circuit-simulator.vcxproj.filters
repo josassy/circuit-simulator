@@ -59,4 +59,60 @@
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\vector files\circuit0.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="..\vector files\circuit0_v.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="..\vector files\circuit1.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="..\vector files\circuit1_v.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="..\vector files\circuit2.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="..\vector files\circuit2_v.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="..\vector files\circuit3.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="..\vector files\circuit3_v.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="..\vector files\circuit4.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="..\vector files\circuit4_v.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="..\vector files\circuit5.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="..\vector files\circuit5_v.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="..\vector files\circuit7.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="..\vector files\circuit7_v.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="..\vector files\circuit8.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="..\vector files\circuit8_v.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="..\vector files\ff.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="..\vector files\ff_v.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+  </ItemGroup>
 </Project>
