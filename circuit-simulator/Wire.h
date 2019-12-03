@@ -21,6 +21,8 @@ public:
 
   std::string getName() const { return name; }
 
+  void printHistory() const;
+
 private:
   std::vector<Gate*> output; // All the gates that the wire drives
   std::vector<WireValue> history; // Full history of wire (including current state)
