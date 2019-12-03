@@ -15,6 +15,10 @@ public:
   // debug statement to show event details
   void print() const;
 
+  int getWireNum() { return wireNum; }
+  WireValue getWireValue() { return value; }
+  int getTime() { return time; }
+
 private:
   int wireNum;
   int time; // in milliseconds

@@ -14,5 +14,6 @@ GateType Enums::strToGateType(std::string str) {
   else if (str == "NAND") { return GateType::NAND; }
   else if (str == "NOR") { return GateType::NOR; }
   else if (str == "XNOR") { return GateType::XNOR; }
-  else { return GateType::NOT; }
+  else if (str == "NOT") { return GateType::NOT; }
+  else { throw std::exception("invalid gate type"); }
 }
