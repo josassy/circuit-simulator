@@ -3,30 +3,29 @@
 #include "Gate.h"
 #include "Wire.h"
 
-Gate::Gate(GateType t, int d, Wire* i1, Wire* i2, Wire* o)
-{
-  type = t;
-  delay = d;
-  in1 = i1;
-  in2 = i2;
-  out = o;
-}
+Gate::Gate(Circuit* c, GateType t, int d, Wire* i1, Wire* i2, Wire* o)
+  : circuit(c), type(t), delay(d), in1(i1), in2(i2), out(o) 
+{}
 
-WireValue Gate::eval()
+void Gate::eval()
 {
-  return doLogic(in1->getState(), in2->getState());
-}
-
-WireValue Gate::eval(WireValue state, Wire *input)
-{
-  // Determine which wire is changing, and evaluate what the change would be
-  if (input == in1) {
-    return doLogic(state, in2->getState());
-  }
-  else if (input == in2) {
-    return doLogic(state, in1->getState());
+  WireValue nextOut = doLogic(in1->getState(), in2->getState());
+  // If output changes, schedule event
+  if (nextOut != out->getState) {
+    circuit->scheduleEvent(out, nextOut, delay);
   }
 }
+
+//void Gate::eval(WireValue state, Wire *input)
+//{
+//  // Determine which wire is changing, and evaluate what the change would be
+//  if (input == in1) {
+//    return doLogic(state, in2->getState());
+//  }
+//  else if (input == in2) {
+//    return doLogic(state, in1->getState());
+//  }
+//}
 
 WireValue Gate::doLogic(WireValue in1State, WireValue in2State)
 {

@@ -1,13 +1,17 @@
 #pragma once
+
 #include "Wire.h"
 #include "Gate.h"
 
-Wire::Wire() {
+Wire::Wire(std::string name) {
+  // Set passed in name to name prop
+  this->name = name;
+  
   // To begin, the wire's value will always be X
   history.push_back(WireValue::X);
 }
 
-WireValue Wire::getState()
+WireValue Wire::getState() const
 {
   // If no history, return unknown as we don't know state yet
   if (history.size() > 0) {
@@ -18,7 +22,7 @@ WireValue Wire::getState()
   }
 }
 
-WireValue Wire::getState(int time)
+WireValue Wire::getState(int time) const
 {
   // check if index is valid. If not, call getState();
   if (time < history.size()) {

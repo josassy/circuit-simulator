@@ -2,12 +2,13 @@
 
 #include <iostream>
 #include "Enums.h"
+#include "Wire.h"
 using namespace Enums;
 
 class Event {
 public: 
   //ctor
-  Event(int wireNum, int time, WireValue value, int count);
+  Event(Wire* wire, int time, WireValue value, int count);
   
   // sort function for use in priority queue
   friend bool operator< (const Event& e1, const Event& e2);
@@ -15,12 +16,12 @@ public:
   // debug statement to show event details
   void print() const;
 
-  int getWireNum() { return wireNum; }
+  Wire* getWire() { return wire; }
   WireValue getWireValue() { return value; }
   int getTime() { return time; }
 
 private:
-  int wireNum;
+  Wire* wire;
   int time; // in milliseconds
   WireValue value;
   int count; // keep track of order events were created

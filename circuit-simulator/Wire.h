@@ -10,14 +10,16 @@ class Gate;
 
 class Wire {
 public:
-  Wire();
-  WireValue getState();
-  WireValue getState(int time);
+  Wire(std::string name = "");
+  WireValue getState() const;
+  WireValue getState(int time) const;
   void setState(WireValue state, int time = -1);
 
   Gate* getGate(int i) const { return output.at(i); }
   void setGate(Gate * g) { output.push_back(g); }
   int getNumGates() const { return (int)output.size(); }
+
+  std::string getName() const { return name; }
 
 private:
   std::vector<Gate*> output; // All the gates that the wire drives

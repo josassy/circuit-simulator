@@ -1,7 +1,9 @@
 #include "Event.h"
 
-Event::Event(int wireNum, int time, WireValue value, int count) {
-  this->wireNum = wireNum;
+Event::Event(Wire* wire, int time, WireValue value, int count)
+  : wire()
+{
+  this->wire = wire;
   this->time = time;
   this->value = value;
   this->count = count;
@@ -21,5 +23,5 @@ bool operator<(const Event & e1, const Event & e2)
 }
 
 void Event::print() const {
-  std::cout << "wire " << wireNum << " to " << value << " at " << time << "ms. Event #" << count << std::endl;
+  std::cout << "wire " << wire->getName() << " to " << value << " at " << time << "ms. Event #" << count << std::endl;
 }
