@@ -4,7 +4,7 @@ Circuit::Circuit(std::string name)
   : name(name) {}
 
 Wire* Circuit::getWire(int index) {
-  if (wireArray.size >= index || wireArray.at(index) == nullptr) {
+  if (wireArray.size() >= index || wireArray.at(index) == nullptr) {
     Wire* newWire = new Wire();
     addWire(newWire, index);
   }
@@ -13,7 +13,7 @@ Wire* Circuit::getWire(int index) {
 
 void Circuit::addWire(Wire* w, int index) {
   // If wireArray is wrong size, push back with nullptr
-  while (wireArray.size <= index) {
+  while (wireArray.size() <= index) {
     wireArray.push_back(nullptr);
   }
 
@@ -45,11 +45,23 @@ void Circuit::handleEvent(Event e) {
   currTime = e.getTime();
 
   // If a scheduled events time is more than 60 ms, stop processing
-  if (e.getTime > 60) {
+  if (e.getTime() > 60) {
     processDone = true;
+    return;
   }
 
-  // Get pointer to target wire, and peform changes
-  Wire* target = wireArray.at(e.getWireNum());
-  target->setState(e.getWireValue());
+  // Use pointer to target wire to peform changes
+  e.getWire()->setState(e.getWireValue());
+}
+
+void Circuit::printWires() {
+  std::cout << "Circuit name: " << name << std::endl;
+  for (Wire* wire : wireArray) {
+    // We only want to print the wires that have names
+    if (wire != nullptr && wire->getName() != "") {
+      std::cout << wire->getName() << ':\t';
+      wire->printHistory();
+      std::cout << std::endl;
+    }
+  }
 }

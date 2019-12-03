@@ -11,7 +11,7 @@ void Gate::eval()
 {
   WireValue nextOut = doLogic(in1->getState(), in2->getState());
   // If output changes, schedule event
-  if (nextOut != out->getState) {
+  if (nextOut != out->getState()) {
     circuit->scheduleEvent(out, nextOut, delay);
   }
 }

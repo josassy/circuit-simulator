@@ -66,10 +66,8 @@ void Wire::setState(WireValue state, int time) {
 
 void Wire::printHistory() const {
   WireValue val;
-  char outChar;
   for (int i = 0; i < history.size(); i++) {
     val = history.at(i);
-    outChar = wireValToChar(val);
-    std::cout << outChar;
+    std::cout << wireValToChar(val);
   }
 }

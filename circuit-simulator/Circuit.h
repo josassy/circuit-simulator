@@ -32,7 +32,21 @@ public:
   * @param {int} delay gate delay of event
   */
   void scheduleEvent(Wire* wire, WireValue value, int delay);
+  
+ /**
+  * Iterate through each Event in eventQueue,
+  * processing them and causing the affected Gates
+  * to generate new Events as needed
+  * This function will process until (processDone)
+  * or all events are processed
+  */
   void processEvents();
+
+ /**
+  * Print the full history of each wire in Circuit.
+  * Should be called after processEvents().
+  */
+  void printWires();
 
 private:
   int currTime;
