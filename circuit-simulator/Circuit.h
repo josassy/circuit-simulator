@@ -19,6 +19,12 @@ public:
   * If none exists, create one and return it
   */ 
   Wire* getWire(int index);
+
+ /**
+  * Get the wire with a specified name.
+  * If none exists, will return nullptr.
+  */
+  Wire* getWire(std::string name);
   
  /**
   * Add an event to the eventQueue.
@@ -42,6 +48,13 @@ public:
   * or all events are processed
   */
   void processEvents();
+
+ /**
+  * WARNING: This method is destructive and will empty the event queue.
+  * Used for debugging purposes.
+  * Prints all the events in the queue.
+  */
+  void printEvents();
 
  /**
   * Print the full history of each wire in Circuit.

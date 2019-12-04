@@ -15,6 +15,15 @@ Wire* Circuit::getWire(int index) {
   return wireArray.at(index);
 }
 
+Wire* Circuit::getWire(std::string name) {
+  for (Wire* wire : wireArray) {
+    if (wire != nullptr && wire->getName() == name) {
+      return wire;
+    }
+  }
+  return nullptr;
+}
+
 void Circuit::addWire(Wire* w, int index) {
   // If wireArray is wrong size, push back with nullptr
   while (wireArray.size() <= index) {
@@ -73,6 +82,14 @@ void Circuit::handleEvent(Event e) {
   }
 }
 
+void Circuit::printEvents() {
+  int size = eventQueue.size();
+  for (int i = 0; i < size; i++) {
+    eventQueue.top().print();
+    eventQueue.pop();
+  }
+}
+
 void Circuit::printWires() const {
   std::cout << "Circuit name: " << name << std::endl;
   for (Wire* wire : wireArray) {
@@ -95,8 +112,10 @@ void Circuit::printSummary() const {
 
       // Loop through each gate on the wire, printing its type
       for (int i = 0; i < numGates; i++) {
-        std::cout << gateTypeToStr(wire->getGate(i)->getType()) << std::endl;
+        std::cout << gateTypeToStr(wire->getGate(i)->getType());
       }
+
+      std::cout << std::endl;
     }
   }
 }
