@@ -46,8 +46,9 @@ public:
   * to generate new Events as needed
   * This function will process until (processDone)
   * or all events are processed
+  * @param {bool} verbose whether to print each event while processing
   */
-  void processEvents();
+  void processEvents(bool verbose = false);
 
  /**
   * WARNING: This method is destructive and will empty the event queue.

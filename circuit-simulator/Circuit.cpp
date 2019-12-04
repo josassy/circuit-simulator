@@ -44,16 +44,18 @@ void Circuit::scheduleEvent(Wire* wire, WireValue value, int delay) {
   scheduleEvent(e);
 }
 
-void Circuit::processEvents() {
+void Circuit::processEvents(bool verbose) {
   while (eventQueue.size() > 0 && !processDone) {
+    // Print event details to debug 
+    if (verbose) {
+      eventQueue.top().print();
+    }
     handleEvent(eventQueue.top());
     eventQueue.pop();
   }
 }
 
 void Circuit::handleEvent(Event e) {
-  // Print event details to debug
-  e.print();
 
   // Set current time to event being processed
   currTime = e.getTime();
@@ -103,7 +105,7 @@ void Circuit::printHistory() const {
     if (wire != nullptr && wire->getName() != "") {
       std::cout << wire->getName() << ":\t";
       wire->printHistory(currTime + 1);
-      std::cout << std::endl;
+      std::cout << "\n\n";
     }
   }
 
@@ -133,7 +135,7 @@ void Circuit::printSummary() const {
 
       // Loop through each gate on the wire, printing its type
       for (int i = 0; i < numGates; i++) {
-        std::cout << gateTypeToStr(wire->getGate(i)->getType());
+        std::cout << gateTypeToStr(wire->getGate(i)->getType()) << " ";
       }
 
       std::cout << std::endl;

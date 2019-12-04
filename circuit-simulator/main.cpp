@@ -29,14 +29,41 @@ std::vector<std::string> stringToVector(std::string line) {
   return result;
 }
 
-int main() {
+void usage() {
+  std::cout << "Options:\n-h\tShow usage statement\n-v\tPrint verbose output" << std::endl;
+}
 
+int main(int argc, char** argv) {
+
+  bool verbose = false;
+  // If args provided, parse them
+  if (argc >= 2) {
+    for (int i = 1; i < argc; i++) {
+      // User passed option
+      if (argv[i][0] == '-') {
+        // Print usage statement
+        if (std::strchr(argv[i], 'h') != nullptr) {
+          usage();
+        }
+        // Enable verbose output
+        if (std::strchr(argv[i], 'v') != nullptr) {
+          verbose = true;
+        }
+      }
+    }
+  }
+  
   std::ifstream inFS;
 
-  // TODO: Prompt for input files
-  std::string circuitFile, vectorFile;
-  circuitFile = "../vector files/circuit1.txt";
-  vectorFile = "../vector files/circuit1_v.txt";
+  //circuitFile = "../vector files/circuit1.txt";
+  //vectorFile = "../vector files/circuit1_v.txt";
+
+  std::cout << "What is the name of the circuit test file (base name only):  ";
+  std::string baseName;
+  std::cin >> baseName;
+
+  std::string circuitFile = baseName + ".txt";
+  std::string vectorFile = baseName + "_v.txt";
 
   // Parse circuit file
   inFS.open(circuitFile);
@@ -58,6 +85,8 @@ int main() {
     std::cout << "File " << circuitFile << " is not a valid CIRCUIT file." << std::endl;
     return 1;
   }
+
+  std::cout << "Simulating " << circuitFile << "." << std::endl;
 
   // Declare circuit object
   Circuit circuit;
@@ -114,10 +143,12 @@ int main() {
   }
 
   // At this point, circuit structure should be complete
-  // Print circuit structure:
   inFS.close();
-  circuit.printSummary();
 
+  if (verbose) {
+    // Print finished circuit structure:
+    circuit.printSummary();
+  }
 
   // Parse vector file
   inFS.open(vectorFile);

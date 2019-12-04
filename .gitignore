@@ -8,3 +8,5 @@
 /Debug
 /circuit-simulator/Debug
 .vs
+/circuit-simulator/Release
+/Release
