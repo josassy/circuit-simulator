@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <string>
+#include <iostream>
 #include "Enums.h"
 
 using namespace Enums;
@@ -20,6 +21,7 @@ public:
   int getNumGates() const { return (int)output.size(); }
 
   std::string getName() const { return name; }
+  void setName(std::string name) { this->name = name; }
 
   void printHistory() const;
 

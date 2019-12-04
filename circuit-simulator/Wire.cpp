@@ -34,7 +34,7 @@ WireValue Wire::getState(int time) const
 }
 
 void Wire::setState(WireValue state, int time) {
-  WireValue prevState = getState();
+  //WireValue prevState = getState();
 
   // If time == -1, push to end of history
   if (time < 0) {
@@ -54,13 +54,6 @@ void Wire::setState(WireValue state, int time) {
     }
     // history.size should now == time
     history.push_back(state);
-  }
-
-  // Update connected gates if there was a change
-  if (prevState != history.back()) {
-    for (int i = 0; i < getNumGates(); i++) {
-      getGate(i)->eval();
-    }
   }
 }
 

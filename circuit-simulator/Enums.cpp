@@ -18,6 +18,17 @@ GateType Enums::strToGateType(std::string str) {
   else { throw std::exception("invalid gate type"); }
 }
 
+std::string Enums::gateTypeToStr(GateType type)
+{
+  if (type == GateType::AND) { return "AND"; }
+  if (type == GateType::OR) { return "OR"; }
+  if (type == GateType::XOR) { return "XOR"; }
+  if (type == GateType::NAND) { return "NAND"; }
+  if (type == GateType::NOR) { return "NOR"; }
+  if (type == GateType::XNOR) { return "XNOR"; }
+  else { return "NOT"; }
+}
+
 /**
  * Convert WireValue to char
  * @param {WireValue} val WireValue to convert

@@ -2,6 +2,7 @@
 #include <vector>
 #include <queue>
 #include "Wire.h"
+#include "Gate.h"
 #include "Event.h"
 
 class Circuit {
@@ -46,7 +47,13 @@ public:
   * Print the full history of each wire in Circuit.
   * Should be called after processEvents().
   */
-  void printWires();
+  void printWires() const;
+
+ /**
+  * Print summary of Wires and Gates in circuit
+  * Used for debugging purposes
+  */
+  void printSummary() const;
 
 private:
   int currTime;
