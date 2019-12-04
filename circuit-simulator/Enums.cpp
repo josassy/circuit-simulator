@@ -21,19 +21,20 @@ GateType Enums::strToGateType(std::string str) {
 std::string Enums::gateTypeToStr(GateType type)
 {
   if (type == GateType::AND) { return "AND"; }
-  if (type == GateType::OR) { return "OR"; }
-  if (type == GateType::XOR) { return "XOR"; }
-  if (type == GateType::NAND) { return "NAND"; }
-  if (type == GateType::NOR) { return "NOR"; }
-  if (type == GateType::XNOR) { return "XNOR"; }
+  else if (type == GateType::OR) { return "OR"; }
+  else if (type == GateType::XOR) { return "XOR"; }
+  else if (type == GateType::NAND) { return "NAND"; }
+  else if (type == GateType::NOR) { return "NOR"; }
+  else if (type == GateType::XNOR) { return "XNOR"; }
   else { return "NOT"; }
 }
 
-/**
- * Convert WireValue to char
- * @param {WireValue} val WireValue to convert
- * @return {char} char representation of WireValue
- */
+WireValue Enums::charToWireVal(char c) {
+  if (c == '0') { return WireValue::OFF; }
+  else if (c == '1') { return WireValue::ON; }
+  else { return WireValue::X; }
+}
+
 char Enums::wireValToChar(WireValue val) {
   switch (val) {
   case WireValue::OFF:

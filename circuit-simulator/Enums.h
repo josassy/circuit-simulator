@@ -26,5 +26,18 @@ namespace Enums {
 
   GateType strToGateType(std::string str);
   std::string gateTypeToStr(GateType type);
+
+/**
+ * Convert char to WireValue
+ * @param {char} c char to convert to WireValue
+ * @return {WireValue} WireValue representation of char
+ */
+  WireValue charToWireVal(char c);
+
+/**
+ * Convert WireValue to char
+ * @param {WireValue} val WireValue to convert
+ * @return {char} char representation of WireValue
+ */
   char wireValToChar(WireValue val);
 }

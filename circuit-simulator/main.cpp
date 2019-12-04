@@ -187,7 +187,7 @@ int main(int argc, char** argv) {
     // Gather event details from vector
     Wire* wire = circuit.getWire(stringVector.at(1));
     int time = std::stoi(stringVector.at(2));
-    WireValue val = (WireValue)std::stoi(stringVector.at(3));
+    WireValue val = charToWireVal(stringVector.at(3)[0]);
 
     // Add event to event queue
     // Even though scheduleEvent takes a delay, we know that at this point currTime=0
@@ -195,7 +195,7 @@ int main(int argc, char** argv) {
   }
 
   // At this point, all events should be in the event queue.
-  circuit.processEvents();
+  circuit.processEvents(verbose);
   circuit.printHistory();
 
   return 0;
