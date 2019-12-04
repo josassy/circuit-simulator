@@ -79,7 +79,7 @@ void Circuit::handleEvent(Event e) {
   for (int i = 0; i < target->getNumGates(); i++) {
     Gate* gate = target->getGate(i);
     WireValue prevValue = gate->getOut()->getState();
-    WireValue currValue = gate->eval(value, target);
+    WireValue currValue = gate->eval();
 
     // If output should change, schedule event to update gate's output
     if (currValue != prevValue) {
@@ -111,7 +111,7 @@ void Circuit::printHistory() const {
   std::cout << "\t";
   for (int i = 0; i < currTime; i++) {
     if (i % 3 == 0) {
-      std::cout << i;
+      std::cout << i % 10;
     }
     else {
       std::cout << ' ';

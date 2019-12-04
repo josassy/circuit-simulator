@@ -10,7 +10,6 @@ public:
   Wire* getOut() const { return out; }
   int getDelay() const { return delay; }
   WireValue eval();
-  WireValue eval(WireValue state, Wire* input);
   GateType getType() const { return type; }
 
 private:

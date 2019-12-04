@@ -35,8 +35,8 @@ int main() {
 
   // TODO: Prompt for input files
   std::string circuitFile, vectorFile;
-  circuitFile = "../vector files/circuit0.txt";
-  vectorFile = "../vector files/circuit0_v.txt";
+  circuitFile = "../vector files/circuit1.txt";
+  vectorFile = "../vector files/circuit1_v.txt";
 
   // Parse circuit file
   inFS.open(circuitFile);
