@@ -60,7 +60,7 @@ public:
   * Print the full history of each wire in Circuit.
   * Should be called after processEvents().
   */
-  void printWires() const;
+  void printHistory() const;
 
  /**
   * Print summary of Wires and Gates in circuit

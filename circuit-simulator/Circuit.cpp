@@ -45,8 +45,9 @@ void Circuit::scheduleEvent(Wire* wire, WireValue value, int delay) {
 }
 
 void Circuit::processEvents() {
-  while (eventQueue.size() > 0 || !processDone) {
+  while (eventQueue.size() > 0 && !processDone) {
     handleEvent(eventQueue.top());
+    eventQueue.pop();
   }
 }
 
@@ -65,9 +66,14 @@ void Circuit::handleEvent(Event e) {
 
   WireValue value = e.getWireValue();
   Wire* target = e.getWire();
+
+  // If the event's effects have already happened, ignore the event
+  if (target->getState() == value) {
+    return;
+  }
   
   // Use pointer to target wire to peform changes
-  target->setState(value);
+  target->setState(value, currTime);
 
   // Check if change in wire will change a downstream gate's output
   for (int i = 0; i < target->getNumGates(); i++) {
@@ -90,16 +96,31 @@ void Circuit::printEvents() {
   }
 }
 
-void Circuit::printWires() const {
+void Circuit::printHistory() const {
   std::cout << "Circuit name: " << name << std::endl;
   for (Wire* wire : wireArray) {
     // We only want to print the wires that have names
     if (wire != nullptr && wire->getName() != "") {
-      std::cout << wire->getName() << ':\t';
-      wire->printHistory();
+      std::cout << wire->getName() << ":\t";
+      wire->printHistory(currTime + 1);
       std::cout << std::endl;
     }
   }
+
+  // Print numbers to indicate time
+  std::cout << "\t";
+  for (int i = 0; i < currTime; i++) {
+    if (i % 3 == 0) {
+      std::cout << i;
+    }
+    else {
+      std::cout << ' ';
+    }
+  }
+
+  // always print last history
+  std::cout << currTime;
+  std::cout << std::endl;
 }
 
 void Circuit::printSummary() const {

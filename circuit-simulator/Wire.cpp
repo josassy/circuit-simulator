@@ -57,10 +57,17 @@ void Wire::setState(WireValue state, int time) {
   }
 }
 
-void Wire::printHistory() const {
+void Wire::printHistory(int length) const {
   WireValue val;
   for (int i = 0; i < history.size(); i++) {
     val = history.at(i);
     std::cout << wireValToChar(val);
+  }
+  // If the desired length is greater than length of history,
+  // print the last character enough times to fill the diff
+  if (history.size() < length) {
+    for (int i = 0; i < length - history.size(); i++) {
+      std::cout << wireValToChar(history.back());
+    }
   }
 }

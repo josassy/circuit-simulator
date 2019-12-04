@@ -164,7 +164,8 @@ int main() {
   }
 
   // At this point, all events should be in the event queue.
-  circuit.printEvents();
-  
+  circuit.processEvents();
+  circuit.printHistory();
+
   return 0;
 }

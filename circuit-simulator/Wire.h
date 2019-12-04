@@ -23,7 +23,13 @@ public:
   std::string getName() const { return name; }
   void setName(std::string name) { this->name = name; }
 
-  void printHistory() const;
+ /**
+  * Print the full history of the wire.
+  * @param length: Desired length of history, if more than actual history
+  * If desired length is greater than history length, it will print the last
+  * value in the history to fill the difference
+  */
+  void printHistory(int length = -1) const;
 
 private:
   std::vector<Gate*> output; // All the gates that the wire drives
