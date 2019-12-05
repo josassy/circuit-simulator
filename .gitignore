@@ -7,6 +7,7 @@
 *.log
 /Debug
 /circuit-simulator/Debug
+/x64/Debug
 .vs
 /circuit-simulator/Release
 /Release

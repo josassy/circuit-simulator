@@ -1,3 +1,11 @@
+/*******************************************************************************
+* File:       Event.cpp
+* Name:       Josiah Lansford, Benjamin Harless
+* Date:       4 December 2019
+* Assignment: HW6 - Circuit Simulator
+* Purpose:    Represents an event in the circuit simulation. Includes sorting
+*             operator for use in priority queue, and print function
+*******************************************************************************/
 #include "Event.h"
 
 Event::Event(Wire* wire, int time, WireValue value, int count)
@@ -23,5 +31,6 @@ bool operator<(const Event & e1, const Event & e2)
 }
 
 void Event::print() const {
-  std::cout << "wire " << wire->getName() << " to " << value << " at " << time << "ms. Event #" << count << std::endl;
+  std::cout << "wire " << wire->getName() << " to " << value << " at " << time 
+    << "ms. Event #" << count << std::endl;
 }

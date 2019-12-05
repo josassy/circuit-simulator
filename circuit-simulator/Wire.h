@@ -3,7 +3,8 @@
 * Name:       Josiah Lansford, Benjamin Harless
 * Date:       4 December 2019
 * Assignment: HW6 - Circuit Simulator
-* Purpose:    
+* Purpose:    Represents a logic wire with a hisory of past states and pointers
+*             to connected Gates
 *******************************************************************************/
 #pragma once
 
@@ -49,6 +50,7 @@ public:
 
 private:
   std::vector<Gate*> output; // All the gates that the wire drives
-  std::vector<WireValue> history; // Full history of wire (including current state)
+  std::vector<WireValue> history; // Full history of wire 
+                                  //(including current state)
   std::string name;
 };

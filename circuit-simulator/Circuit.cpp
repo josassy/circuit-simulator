@@ -1,3 +1,11 @@
+/*******************************************************************************
+* File:       Circuit.cpp
+* Name:       Josiah Lansford, Benjamin Harless
+* Date:       4 December 2019
+* Assignment: HW6 - Circuit Simulator
+* Purpose:    Reperesents the logic circuit as a collection of Wires, Gates,
+*             and Events, and runs the simulation.
+*******************************************************************************/
 #include "Circuit.h"
 
 Circuit::Circuit(std::string name) 
@@ -140,7 +148,8 @@ void Circuit::printSummary() const {
       // Loop through each gate on the wire, printing its type
       for (int i = 0; i < numGates; i++) {
         Gate* gate = wire->getGate(i);
-        std::cout << gateTypeToStr(gate->getType()) << " (" << gate->getDelay() << "ms)";
+        std::cout << gateTypeToStr(gate->getType()) << " (" << 
+          gate->getDelay() << "ms)";
       }
 
       std::cout << std::endl;

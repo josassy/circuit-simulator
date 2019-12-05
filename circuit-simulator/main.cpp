@@ -1,3 +1,10 @@
+/*******************************************************************************
+* File:       main.cpp
+* Name:       Josiah Lansford, Benjamin Harless
+* Date:       4 December 2019
+* Assignment: HW6 - Circuit Simulator
+* Purpose:    
+*******************************************************************************/
 #include <iostream>
 #include <queue>
 #include "Event.h"
@@ -32,7 +39,8 @@ std::vector<std::string> stringToVector(std::string line) {
 }
 
 void usage() {
-  std::cout << "Options:\n-h\tShow usage statement\n-v\tPrint verbose output" << std::endl;
+  std::cout << "Options:\n-h\tShow usage statement\n-v\tPrint verbose output" 
+    << std::endl;
 }
 
 int runSimulation(std::string circuitFile, std::string vectorFile, bool verbose) {
@@ -55,7 +63,8 @@ int runSimulation(std::string circuitFile, std::string vectorFile, bool verbose)
 
   // If the file starts with CIRCUIT, we have the correct file
   if (stringVector.at(0) != "CIRCUIT") {
-    std::cout << "File " << circuitFile << " is not a valid CIRCUIT file." << std::endl;
+    std::cout << "File " << circuitFile << " is not a valid CIRCUIT file." 
+      << std::endl;
     return 1;
   }
 
@@ -112,7 +121,8 @@ int runSimulation(std::string circuitFile, std::string vectorFile, bool verbose)
         int input1 = std::stoi(stringVector.at(2));
         int output = std::stoi(stringVector.at(3));
 
-        Gate* gate = new Gate(gateType, delay, circuit.getWire(input1), nullptr, circuit.getWire(output));
+      Gate* gate = new Gate(gateType, delay, circuit.getWire(input1), nullptr, 
+        circuit.getWire(output));
 
         circuit.getWire(input1)->setGate(gate);
       }
@@ -164,7 +174,8 @@ int runSimulation(std::string circuitFile, std::string vectorFile, bool verbose)
 
   // If file starts with VECTOR, we have the right vector file
   if (stringVector.at(0) != "VECTOR") {
-    std::cout << "File " << vectorFile << " is not a valid VECTOR file." << std::endl;
+    std::cout << "File " << vectorFile << " is not a valid VECTOR file." 
+      << std::endl;
     return 1;
   }
 

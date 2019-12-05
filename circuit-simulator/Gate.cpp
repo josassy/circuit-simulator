@@ -1,3 +1,10 @@
+/*******************************************************************************
+* File:       Gate.cpp
+* Name:       Josiah Lansford, Benjamin Harless
+* Date:       4 December 2019
+* Assignment: HW6 - Circuit Simulator
+* Purpose:    Represents a logic gate with a type and Wire inputs and output
+*******************************************************************************/
 #pragma once
 
 #include "Gate.h"
