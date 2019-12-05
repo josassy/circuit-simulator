@@ -43,7 +43,8 @@ void usage() {
     << std::endl;
 }
 
-int runSimulation(std::string circuitFile, std::string vectorFile, bool verbose) {
+int runSimulation(std::string circuitFile, std::string vectorFile, 
+  bool verbose) {
   std::ifstream inFS;
 
   // Parse circuit file
@@ -139,7 +140,8 @@ int runSimulation(std::string circuitFile, std::string vectorFile, bool verbose)
         int input2 = std::stoi(stringVector.at(3));
         int output = std::stoi(stringVector.at(4));
 
-        Gate* gate = new Gate(gateType, delay, circuit.getWire(input1), circuit.getWire(input2), circuit.getWire(output));
+        Gate* gate = new Gate(gateType, delay, circuit.getWire(input1), 
+          circuit.getWire(input2), circuit.getWire(output));
         circuit.getWire(input1)->setGate(gate);
         circuit.getWire(input2)->setGate(gate);
       }
@@ -208,7 +210,8 @@ int runSimulation(std::string circuitFile, std::string vectorFile, bool verbose)
 
 
       // Add event to event queue
-      // Even though scheduleEvent takes a delay, we know that at this point currTime=0
+      // Even though scheduleEvent takes a delay
+      // we know that at this point currTime=0
       circuit.scheduleEvent(wire, val, time);
     }
     catch (...) {
