@@ -1,3 +1,11 @@
+/*******************************************************************************
+* File:       Enums.cpp
+* Name:       Josiah Lansford, Benjamin Harless
+* Date:       4 December 2019
+* Assignment: HW6 - Circuit Simulator
+* Purpose:    Contains the enumerations needed for Gate type and Wire value, as
+*             well as the required helper functions to handle them.
+*******************************************************************************/
 #pragma once
 #include "Enums.h"
 

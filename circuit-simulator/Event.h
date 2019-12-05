@@ -1,3 +1,11 @@
+/*******************************************************************************
+* File:       Event.h
+* Name:       Josiah Lansford, Benjamin Harless
+* Date:       4 December 2019
+* Assignment: HW6 - Circuit Simulator
+* Purpose:    Represents an event in the circuit simulation. Includes sorting
+*             operator for use in priority queue, and print function
+*******************************************************************************/
 #pragma once
 
 #include <iostream>

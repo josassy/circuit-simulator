@@ -1,3 +1,11 @@
+/*******************************************************************************
+* File:       Circuit.h
+* Name:       Josiah Lansford, Benjamin Harless
+* Date:       4 December 2019
+* Assignment: HW6 - Circuit Simulator
+* Purpose:    Reperesents the logic circuit as a collection of Wires, Gates,
+*             and Events, and runs the simulation.
+*******************************************************************************/
 #pragma once
 #include <vector>
 #include <queue>
