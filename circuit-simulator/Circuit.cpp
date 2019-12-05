@@ -57,15 +57,6 @@ void Circuit::processEvents(bool verbose) {
 
 void Circuit::handleEvent(Event e) {
 
-  // Set current time to event being processed
-  currTime = e.getTime();
-
-  // If a scheduled events time is more than 60 ms, stop processing
-  if (e.getTime() > 60) {
-    processDone = true;
-    return;
-  }
-
   WireValue value = e.getWireValue();
   Wire* target = e.getWire();
 
@@ -73,21 +64,34 @@ void Circuit::handleEvent(Event e) {
   if (target->getState() == value) {
     return;
   }
-  
-  // Use pointer to target wire to peform changes
-  target->setState(value, currTime);
+
+  // If a scheduled events time is more than 60 ms, stop processing
+  if (e.getTime() > 60) {
+    processDone = true;
+    return;
+  }
+
+  // Set current time to event being processed
+  currTime = e.getTime();
 
   // Check if change in wire will change a downstream gate's output
   for (int i = 0; i < target->getNumGates(); i++) {
     Gate* gate = target->getGate(i);
-    WireValue prevValue = gate->getOut()->getState();
+
+    // Get WireValue as the inputs currently stand
     WireValue currValue = gate->eval();
 
-    // If output should change, schedule event to update gate's output
-    if (currValue != prevValue) {
-      scheduleEvent(gate->getOut(), currValue, gate->getDelay());
+    // Get wire value if the target input were to change state to value
+    WireValue futureValue = gate->eval(value, target);
+
+    // If gate output will change, schedule event to update gate's output
+    if (currValue != futureValue) {
+      scheduleEvent(gate->getOut(), futureValue, gate->getDelay());
     }
   }
+  
+  // Use pointer to target wire to peform changes
+  target->setState(value, currTime);
 }
 
 void Circuit::printEvents() {
@@ -112,7 +116,7 @@ void Circuit::printHistory() const {
   // Print numbers to indicate time
   std::cout << "\t";
   for (int i = 0; i < currTime; i++) {
-    if (i % 3 == 0) {
+    if (i % 5 == 0) {
       std::cout << i % 10;
     }
     else {
@@ -135,7 +139,8 @@ void Circuit::printSummary() const {
 
       // Loop through each gate on the wire, printing its type
       for (int i = 0; i < numGates; i++) {
-        std::cout << gateTypeToStr(wire->getGate(i)->getType()) << " ";
+        Gate* gate = wire->getGate(i);
+        std::cout << gateTypeToStr(gate->getType()) << " (" << gate->getDelay() << "ms)";
       }
 
       std::cout << std::endl;

@@ -55,9 +55,6 @@ int main(int argc, char** argv) {
   
   std::ifstream inFS;
 
-  //circuitFile = "../vector files/circuit1.txt";
-  //vectorFile = "../vector files/circuit1_v.txt";
-
   std::cout << "What is the name of the circuit test file (base name only):  ";
   std::string baseName;
   std::cin >> baseName;

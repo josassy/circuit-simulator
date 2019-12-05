@@ -65,8 +65,9 @@ void Wire::printHistory(int length) const {
   }
   // If the desired length is greater than length of history,
   // print the last character enough times to fill the diff
-  if (history.size() < length) {
-    for (int i = 0; i < length - history.size(); i++) {
+  int historySize = history.size();
+  if (historySize < length) {
+    for (int i = 0; i < length - historySize; i++) {
       std::cout << wireValToChar(history.back());
     }
   }
