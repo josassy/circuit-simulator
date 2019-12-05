@@ -6,7 +6,6 @@
 #include "Gate.h"
 #include <fstream>
 #include <sstream>
-#include <cstring>
 
 using namespace Enums;
 
@@ -22,8 +21,11 @@ std::vector<std::string> stringToVector(std::string line) {
   std::string token;
   std::vector<std::string> result;
   while (!ss.eof()) {
+    token = "";
     ss >> token;
-    result.push_back(token);
+    if (token != "") {
+      result.push_back(token);
+    }
   }
 
   return result;
@@ -33,34 +35,8 @@ void usage() {
   std::cout << "Options:\n-h\tShow usage statement\n-v\tPrint verbose output" << std::endl;
 }
 
-int main(int argc, char** argv) {
-
-  bool verbose = false;
-  // If args provided, parse them
-  if (argc >= 2) {
-    for (int i = 1; i < argc; i++) {
-      // User passed option
-      if (argv[i][0] == '-') {
-        // Print usage statement
-        if (std::strchr(argv[i], 'h') != nullptr) {
-          usage();
-        }
-        // Enable verbose output
-        if (std::strchr(argv[i], 'v') != nullptr) {
-          verbose = true;
-        }
-      }
-    }
-  }
-  
+int runSimulation(std::string circuitFile, std::string vectorFile, bool verbose) {
   std::ifstream inFS;
-
-  std::cout << "What is the name of the circuit test file (base name only):  ";
-  std::string baseName;
-  std::cin >> baseName;
-
-  std::string circuitFile = baseName + ".txt";
-  std::string vectorFile = baseName + "_v.txt";
 
   // Parse circuit file
   inFS.open(circuitFile);
@@ -87,7 +63,7 @@ int main(int argc, char** argv) {
 
   // Declare circuit object
   Circuit circuit;
-    
+
   // Initialize circuit with name on first line
   circuit = Circuit(stringVector.at(1));
 
@@ -105,37 +81,62 @@ int main(int argc, char** argv) {
     // Separate line into vector
     stringVector = stringToVector(line);
 
-    // Handle wire creation
-    if (stringVector.at(0) == "INPUT" || stringVector.at(0) == "OUTPUT") {
-      std::string wireName = stringVector.at(1);
-      int wireNum = std::stoi(stringVector.at(2));
-        
-      // Create wire & set its name as defined
-      circuit.getWire(wireNum)->setName(wireName);
-    }
+    // If any exceptions are thrown, skip the line
+    try {
+      // Handle wire creation
+      if (stringVector.at(0) == "INPUT" || stringVector.at(0) == "OUTPUT") {
 
-    // Handle gates
-    // Special case: NOT gate only has 1 input
-    else if (stringVector.at(0) == "NOT") {
-      GateType gateType = strToGateType(stringVector.at(0));
-      int delay = std::stoi(stringVector.at(1));
-      int input1 = std::stoi(stringVector.at(2));
-      int output = std::stoi(stringVector.at(3));
+        // If there are less than two arguments, invalid wire definition
+        if (stringVector.size() < 3) {
+          throw std::exception();
+        }
 
-      Gate* gate = new Gate(gateType, delay, circuit.getWire(input1), nullptr, circuit.getWire(output));
+        std::string wireName = stringVector.at(1);
+        int wireNum = std::stoi(stringVector.at(2));
 
-      circuit.getWire(input1)->setGate(gate);
-    }
-    else {
-      GateType gateType = strToGateType(stringVector.at(0));
-      int delay = std::stoi(stringVector.at(1));
-      int input1 = std::stoi(stringVector.at(2));
-      int input2 = std::stoi(stringVector.at(3));
-      int output = std::stoi(stringVector.at(4));
+        // Create wire & set its name as defined
+        circuit.getWire(wireNum)->setName(wireName);
+      }
 
-      Gate* gate = new Gate(gateType, delay, circuit.getWire(input1), circuit.getWire(input2), circuit.getWire(output));
+      // Handle gates
+      // Special case: NOT gate only has 1 input
+      else if (stringVector.at(0) == "NOT") {
+
+        // If there are less than 4 arguments, invalid gate definition
+        if (stringVector.size() < 4) {
+          throw std::exception();
+        }
+
+        GateType gateType = strToGateType(stringVector.at(0));
+        int delay = std::stoi(stringVector.at(1));
+        int input1 = std::stoi(stringVector.at(2));
+        int output = std::stoi(stringVector.at(3));
+
+        Gate* gate = new Gate(gateType, delay, circuit.getWire(input1), nullptr, circuit.getWire(output));
+
+        circuit.getWire(input1)->setGate(gate);
+      }
+      else {
+
+        // If there are less than 5 arguments, invalid gate definition
+        if (stringVector.size() < 5) {
+          throw std::exception();
+        }
+
+        GateType gateType = strToGateType(stringVector.at(0));
+        int delay = std::stoi(stringVector.at(1));
+        int input1 = std::stoi(stringVector.at(2));
+        int input2 = std::stoi(stringVector.at(3));
+        int output = std::stoi(stringVector.at(4));
+
+        Gate* gate = new Gate(gateType, delay, circuit.getWire(input1), circuit.getWire(input2), circuit.getWire(output));
         circuit.getWire(input1)->setGate(gate);
         circuit.getWire(input2)->setGate(gate);
+      }
+    }
+    // Catch all exceptions caused by bad input file, and ignore them, skipping line
+    catch (...) {
+      std::cout << "Warning: Invalid wire or gate definition " << line << std::endl;
     }
   }
 
@@ -173,7 +174,7 @@ int main(int argc, char** argv) {
     // Get next line from file
     std::getline(inFS, line);
 
-    // If the line is empty, stop
+    // If the line is empty, stop and skip line
     if (line.length() == 0) {
       break;
     }
@@ -182,13 +183,26 @@ int main(int argc, char** argv) {
     stringVector = stringToVector(line);
 
     // Gather event details from vector
-    Wire* wire = circuit.getWire(stringVector.at(1));
-    int time = std::stoi(stringVector.at(2));
-    WireValue val = charToWireVal(stringVector.at(3)[0]);
+    // If there are any exceptions thrown skip line
+    try {
+      // If there are less than 4 arguments, invalid vector definition
+      if (stringVector.size() < 4) {
+        std::string err = "Invalid vector declaration " + line;
+        throw std::exception(err.c_str());
+      }
 
-    // Add event to event queue
-    // Even though scheduleEvent takes a delay, we know that at this point currTime=0
-    circuit.scheduleEvent(wire, val, time);
+      Wire* wire = circuit.getWire(stringVector.at(1));
+      int time = std::stoi(stringVector.at(2));
+      WireValue val = charToWireVal(stringVector.at(3)[0]);
+
+
+      // Add event to event queue
+      // Even though scheduleEvent takes a delay, we know that at this point currTime=0
+      circuit.scheduleEvent(wire, val, time);
+    }
+    catch (...) {
+      std::cout << "Warning: Invalid vector definition " << line << std::endl;
+    }
   }
 
   // At this point, all events should be in the event queue.
@@ -196,4 +210,63 @@ int main(int argc, char** argv) {
   circuit.printHistory();
 
   return 0;
+
+}
+
+int main(int argc, char** argv) {
+
+  bool verbose = false;
+  // If args provided, parse them
+  if (argc >= 2) {
+    for (int i = 1; i < argc; i++) {
+      // User passed option
+      if (argv[i][0] == '-') {
+        // Print usage statement
+        if (std::strchr(argv[i], 'h') != nullptr) {
+          usage();
+        }
+        // Enable verbose output
+        if (std::strchr(argv[i], 'v') != nullptr) {
+          verbose = true;
+        }
+      }
+    }
+  }
+
+  bool done = false;
+  while (!done) {
+    std::cout << "Enter the name of the circuit test file (base name only):  ";
+    std::string baseName;
+    std::cin >> baseName;
+
+    std::string circuitFile = baseName + ".txt";
+    std::string vectorFile = baseName + "_v.txt";
+
+    int result = runSimulation(circuitFile, vectorFile, verbose);
+    // function returned with error. Attempt to correct circuit name.
+    if (result == 1) {
+      std::cout << "Let's try again." << std::endl;
+    }
+    // circuit was processed normally
+    else {
+      // Loop until valid input
+      while (true) {
+        std::cout << "Would you like to simulate another circuit? (y/n):  ";
+        std::string response;
+        std::cin >> response;
+        if (response.length() > 0) {
+          char letter = tolower(response[0]);
+          if (letter == 'n') {
+            done = true;
+            break;
+          }
+          if (letter == 'y') {
+            break;
+          }
+        }
+        // user didn't say yes or no
+        std::cout << "Invalid input" << std::endl;
+      }
+    }
+  }
 }

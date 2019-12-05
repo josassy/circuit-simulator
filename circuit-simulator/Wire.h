@@ -21,6 +21,15 @@ public:
   Wire(std::string name = "");
   WireValue getState() const;
   WireValue getState(int time) const;
+
+ /**
+  * Set the state of the wire
+  * @param {WireValue} state the value to set wire to
+  * @param {int}       time  the time in history the
+  * change should be made. Can be equal to or more than
+  * current time. If time is equal, it will replace the
+  * current history value rather than push_back(state)
+  */
   void setState(WireValue state, int time = -1);
 
   Gate* getGate(int i) const { return output.at(i); }
@@ -32,7 +41,7 @@ public:
 
  /**
   * Print the full history of the wire.
-  * @param length: Desired length of history, if more than actual history
+  * @param {int} length Desired length of history, if more than actual history.
   * If desired length is greater than history length, it will print the last
   * value in the history to fill the difference
   */
