@@ -13,6 +13,7 @@
 #include "Gate.h"
 #include <fstream>
 #include <sstream>
+#include <cstring>
 
 using namespace Enums;
 
@@ -200,8 +201,7 @@ int runSimulation(std::string circuitFile, std::string vectorFile,
     try {
       // If there are less than 4 arguments, invalid vector definition
       if (stringVector.size() < 4) {
-        std::string err = "Invalid vector declaration " + line;
-        throw std::exception(err.c_str());
+        throw std::exception();
       }
 
       Wire* wire = circuit.getWire(stringVector.at(1));
