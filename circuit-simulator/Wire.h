@@ -1,3 +1,10 @@
+/*******************************************************************************
+* File:       Wire.h
+* Name:       Josiah Lansford, Benjamin Harless
+* Date:       4 December 2019
+* Assignment: HW6 - Circuit Simulator
+* Purpose:    
+*******************************************************************************/
 #pragma once
 
 #include <vector>
